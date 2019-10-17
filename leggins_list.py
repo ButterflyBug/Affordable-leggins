@@ -10,14 +10,15 @@ def get_list_of_leggins_from_page(page_number):
     parsed_response_html = BeautifulSoup(response_html)
 
     leggins = parsed_response_html.find_all(
-        "div", class_="athenaProductBlock_title"
+        "span", class_="athenaProductBlock_hiddenElement"
     )
 
     leggin_name_list = []
 
     for leggin in leggins:
-        leggin_name = leggin.h2.text.replace("\n", "")
-        leggin_name_list.append(leggin_name)
+        leggin_name = leggin["data-product-title"]
+        leggin_id = leggin["data-product-id"]
+        leggin_name_list.append({"leggin_name": leggin_name, "leggin_id": leggin_id})
 
     return leggin_name_list
 
