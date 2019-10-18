@@ -18,7 +18,12 @@ def get_list_of_leggins_from_page(page_number):
     for leggin in leggins:
         leggin_name = leggin["data-product-title"]
         leggin_id = leggin["data-product-id"]
-        leggin_name_list.append({"leggin_name": leggin_name, "leggin_id": leggin_id})
+        leggin_price = float(leggin["data-product-price"].replace(" zł", ""))
+        leggin_name_list.append({
+            "leggin_name": leggin_name,
+            "leggin_id": leggin_id,
+            "leggin_price": leggin_price
+        })
 
     return leggin_name_list
 
@@ -37,3 +42,6 @@ def get_list_of_leggins():
 
 
 print(get_list_of_leggins())
+
+# mainContent > section:nth-child(2) > div.responsiveProductListPage >
+# main > div.productListProducts > div > div:nth-child(1) > div > span
