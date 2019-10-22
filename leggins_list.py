@@ -22,10 +22,13 @@ def get_list_of_leggins_from_page(page_number):
         leggin_price = float(
             leggin_data["data-product-price"].replace(" zł", ""))
 
+        leggin_rrp = get_rrp_from_single_site(leggin_id) or leggin_price
+
         leggin_name_list.append({
             "leggin_name": leggin_name,
             "leggin_id": leggin_id,
             "leggin_price": leggin_price,
+            "leggin_rrp": leggin_rrp
         })
 
     return leggin_name_list
@@ -39,9 +42,12 @@ def get_rrp_from_single_site(identificator):
     single_response_html = single_response.text
     parsed_single_response_html = BeautifulSoup(single_response_html, "html")
 
-    leggin_rrp = float(parsed_single_response_html.find(
-        "p", class_="productPrice_rrp"
-    ).text.replace(" zł", "").replace("RRP: ", ""))
+    if parsed_single_response_html.find("p", class_="productPrice_rrp"):
+        leggin_rrp = float(parsed_single_response_html.find(
+            "p", class_="productPrice_rrp"
+        ).text.replace(" zł", "").replace("RRP: ", ""))
+    else:
+        leggin_rrp = None
 
     return leggin_rrp
 
