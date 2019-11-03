@@ -63,9 +63,3 @@ def get_list_of_leggins():
         list_of_leggins_per_page = get_list_of_leggins_from_page(page_number)
 
     return list_of_leggins
-
-
-print(get_list_of_leggins())
-
-for element in get_list_of_leggins():
-    print(element)
