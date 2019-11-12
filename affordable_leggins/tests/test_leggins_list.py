@@ -1,6 +1,7 @@
 import pytest
 from affordable_leggins.leggins_list import get_rrp_from_single_site
 from affordable_leggins.leggins_list import get_list_of_leggins_from_page
+from affordable_leggins.leggins_list import get_list_of_leggins
 
 
 def test_get_rrp_from_single_site_when_rrp_available():
@@ -28,6 +29,32 @@ def test_get_list_of_leggins_from_existing_page():
     }
     assert single_leggin in get_list_of_leggins_from_page(1)
 
+
 def test_get_list_of_leggins_from_nonexisting_page():
     """ Test function when page does not exist """
     assert get_list_of_leggins_from_page(120) == []
+
+
+def test_get_list_of_leggins():
+    """
+    Test if leggin from available pages can be found
+    in a list of all leggins
+    """
+    list_of_leggins = get_list_of_leggins()
+
+    leggin_from_first_page = {
+        'leggin_name': 'Legginsy Curve - Czarne',
+        'leggin_id': '12068032',
+        'leggin_price': 122.0,
+        'leggin_rrp': 159.0
+    }
+
+    leggin_from_second_page = {
+        'leggin_name': 'Bezszwowe legginsy Contrast - Białe',
+        'leggin_id': '12016444',
+        'leggin_price': 199.0,
+        'leggin_rrp': 199.0
+    }
+
+    assert leggin_from_first_page in list_of_leggins
+    assert leggin_from_second_page in list_of_leggins
