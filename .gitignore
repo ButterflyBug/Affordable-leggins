@@ -2,3 +2,4 @@ myenv
 .vscode
 __pycache__
 .pytest_cache
+affordable_leggins.egg-info
