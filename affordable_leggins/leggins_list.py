@@ -7,7 +7,7 @@ def get_list_of_leggins_from_page(page_number):
     response = requests.get(my_protein_site, {"pageNumber": page_number})
 
     response_html = response.text
-    parsed_response_html = BeautifulSoup(response_html, "html")
+    parsed_response_html = BeautifulSoup(response_html, features="html.parser")
 
     leggins = parsed_response_html.find_all(
         "div", class_="productListProducts_product"
@@ -40,7 +40,7 @@ def get_rrp_from_single_site(identificator):
     single_response = requests.get(single_leggin_site)
 
     single_response_html = single_response.text
-    parsed_single_response_html = BeautifulSoup(single_response_html, "html")
+    parsed_single_response_html = BeautifulSoup(single_response_html, features="html.parser")
 
     if parsed_single_response_html.find("p", class_="productPrice_rrp"):
         leggin_rrp = float(parsed_single_response_html.find(
