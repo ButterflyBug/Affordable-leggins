@@ -2,6 +2,9 @@ import pytest
 from affordable_leggins.leggins_list import get_rrp_from_single_site
 from affordable_leggins.leggins_list import get_list_of_leggins_from_page
 from affordable_leggins.leggins_list import get_list_of_leggins
+from affordable_leggins.store import store_data
+import json
+import os
 
 
 @pytest.mark.vcr()
@@ -64,3 +67,22 @@ def test_get_list_of_leggins():
 
     assert leggin_from_first_page in list_of_leggins
     assert leggin_from_second_page in list_of_leggins
+
+
+@pytest.mark.vcr()
+def test_store_data():
+    """Tests if file with data is created and checks existing of a product"""
+
+    leggin_in_file = {
+        "leggin_name": "Legginsy Curve - Czarne",
+        "leggin_id": "12068032",
+        "leggin_price": 159.0,
+        "leggin_rrp": 159.0
+    }
+
+    file = store_data()
+    file_path = os.path.abspath(file.name)
+    opened_file = open(file_path, "r")
+    loaded_elements = json.load(opened_file)
+
+    assert leggin_in_file in loaded_elements
