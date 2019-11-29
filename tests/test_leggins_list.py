@@ -7,13 +7,13 @@ import json
 import os
 
 
-@pytest.mark.vcr()
+@pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
 def test_get_rrp_from_single_site_when_rrp_available():
     """ Test function when rrp found on the website """
     assert get_rrp_from_single_site(11869784) == 159.0
 
 
-@pytest.mark.vcr()
+@pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
 def test_get_rrp_from_single_site_when_rrp_not_available():
     """ Test function when there is no rrp """
     assert get_rrp_from_single_site(12053031) is None
@@ -25,7 +25,7 @@ def test_get_rrp_from_single_site_when_leggin_not_available():
     assert get_rrp_from_single_site(99999999) is None
 
 
-@pytest.mark.vcr()
+@pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
 def test_get_list_of_leggins_from_existing_page():
     """ Test function when page exists """
     single_leggin = {
@@ -43,7 +43,7 @@ def test_get_list_of_leggins_from_nonexisting_page():
     assert get_list_of_leggins_from_page(120) == []
 
 
-@pytest.mark.vcr()
+@pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
 def test_get_list_of_leggins():
     """
     Test if leggin from available pages can be found
@@ -69,14 +69,14 @@ def test_get_list_of_leggins():
     assert leggin_from_second_page in list_of_leggins
 
 
-@pytest.mark.vcr()
+@pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
 def test_store_data():
     """Tests if file with data is created and checks existing of a product"""
 
     leggin_in_file = {
         "leggin_name": "Legginsy Curve - Czarne",
         "leggin_id": "12068032",
-        "leggin_price": 159.0,
+        "leggin_price": 122.0,
         "leggin_rrp": 159.0
     }
 
