@@ -29,10 +29,10 @@ def test_get_rrp_from_single_site_when_leggin_not_available():
 def test_get_list_of_leggins_from_existing_page():
     """ Test function when page exists """
     single_leggin = {
-        'leggin_id': '12068032',
-        'leggin_name': 'Legginsy Curve - Czarne',
-        'leggin_price': 122.0,
-        'leggin_rrp': 159.0
+        "leggin_id": "12068032",
+        "leggin_name": "Legginsy Curve - Czarne",
+        "leggin_price": 122.0,
+        "leggin_rrp": 159.0,
     }
     assert single_leggin in get_list_of_leggins_from_page(1)
 
@@ -52,17 +52,17 @@ def test_get_list_of_leggins():
     list_of_leggins = get_list_of_leggins()
 
     leggin_from_first_page = {
-        'leggin_name': 'Legginsy Curve - Czarne',
-        'leggin_id': '12068032',
-        'leggin_price': 122.0,
-        'leggin_rrp': 159.0
+        "leggin_name": "Legginsy Curve - Czarne",
+        "leggin_id": "12068032",
+        "leggin_price": 122.0,
+        "leggin_rrp": 159.0,
     }
 
     leggin_from_second_page = {
-        'leggin_name': 'Bezszwowe legginsy Contrast - Białe',
-        'leggin_id': '12016444',
-        'leggin_price': 199.0,
-        'leggin_rrp': 199.0
+        "leggin_name": "Bezszwowe legginsy Contrast - Białe",
+        "leggin_id": "12016444",
+        "leggin_price": 199.0,
+        "leggin_rrp": 199.0,
     }
 
     assert leggin_from_first_page in list_of_leggins
@@ -77,7 +77,7 @@ def test_store_data():
         "leggin_name": "Legginsy Curve - Czarne",
         "leggin_id": "12068032",
         "leggin_price": 122.0,
-        "leggin_rrp": 159.0
+        "leggin_rrp": 159.0,
     }
 
     file = store_data()

@@ -9,9 +9,7 @@ def get_list_of_leggins_from_page(page_number):
     response_html = response.text
     parsed_response_html = BeautifulSoup(response_html, features="html.parser")
 
-    leggins = parsed_response_html.find_all(
-        "div", class_="productListProducts_product"
-    )
+    leggins = parsed_response_html.find_all("div", class_="productListProducts_product")
 
     leggin_name_list = []
 
@@ -19,33 +17,37 @@ def get_list_of_leggins_from_page(page_number):
         leggin_data = leggin.find("span")
         leggin_name = leggin_data["data-product-title"]
         leggin_id = leggin_data["data-product-id"]
-        leggin_price = float(
-            leggin_data["data-product-price"].replace(" zł", ""))
+        leggin_price = float(leggin_data["data-product-price"].replace(" zł", ""))
 
         leggin_rrp = get_rrp_from_single_site(leggin_id) or leggin_price
 
-        leggin_name_list.append({
-            "leggin_name": leggin_name,
-            "leggin_id": leggin_id,
-            "leggin_price": leggin_price,
-            "leggin_rrp": leggin_rrp
-        })
+        leggin_name_list.append(
+            {
+                "leggin_name": leggin_name,
+                "leggin_id": leggin_id,
+                "leggin_price": leggin_price,
+                "leggin_rrp": leggin_rrp,
+            }
+        )
 
     return leggin_name_list
 
 
 def get_rrp_from_single_site(identificator):
-    single_leggin_site = "https://www.myprotein.pl/" + \
-        str(identificator) + ".html"
+    single_leggin_site = "https://www.myprotein.pl/" + str(identificator) + ".html"
     single_response = requests.get(single_leggin_site)
 
     single_response_html = single_response.text
-    parsed_single_response_html = BeautifulSoup(single_response_html, features="html.parser")
+    parsed_single_response_html = BeautifulSoup(
+        single_response_html, features="html.parser"
+    )
 
     if parsed_single_response_html.find("p", class_="productPrice_rrp"):
-        leggin_rrp = float(parsed_single_response_html.find(
-            "p", class_="productPrice_rrp"
-        ).text.replace(" zł", "").replace("RRP: ", ""))
+        leggin_rrp = float(
+            parsed_single_response_html.find("p", class_="productPrice_rrp")
+            .text.replace(" zł", "")
+            .replace("RRP: ", "")
+        )
     else:
         leggin_rrp = None
 
