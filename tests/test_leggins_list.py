@@ -2,7 +2,7 @@ import pytest
 from affordable_leggins.leggins_list import get_rrp_from_single_site
 from affordable_leggins.leggins_list import get_list_of_leggins_from_page
 from affordable_leggins.leggins_list import get_list_of_leggins
-from affordable_leggins.store import store_data
+from affordable_leggins.store import store_data, read_data
 import json
 import os
 
@@ -80,9 +80,20 @@ def test_store_data():
         "leggin_rrp": 159.0,
     }
 
-    file = store_data()
+    file = store_data("tests/data/test_leggins_list")
     file_path = os.path.abspath(file.name)
     opened_file = open(file_path, "r")
     loaded_elements = json.load(opened_file)
 
     assert leggin_in_file in loaded_elements
+
+
+def test_read_data():
+    leggin = {
+        "leggin_name": "Legginsy siatkowe Power",
+        "leggin_id": "11869780",
+        "leggin_price": 179.0,
+        "leggin_rrp": 179.0
+    }
+    leggins_list = read_data("tests/data/test_leggins_list", "04", "12", "2019")
+    assert leggins_list[1] == leggin
