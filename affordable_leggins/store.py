@@ -6,7 +6,7 @@ from affordable_leggins.leggins_list import get_list_of_leggins
 
 def make_directory(directory_name):
     try:
-        os.mkdir("./" + directory_name)
+        os.mkdir(directory_name)
     except FileExistsError:
         pass
 
@@ -21,7 +21,7 @@ def store_data(directory_name):
 
 def read_data(directory_name, day, month, year):
     file_name = (
-       directory_name + "/leggins_lists_" + day + "-" + month + "-" + year + ".json"
+        directory_name + "/leggins_lists_" + day + "-" + month + "-" + year + ".json"
     )
     with open(file_name, "r") as file:
         data_to_read = file.read()
