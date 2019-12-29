@@ -27,6 +27,7 @@ def get_list_of_leggins_from_page(page_number):
                 "leggin_id": leggin_id,
                 "leggin_price": leggin_price,
                 "leggin_rrp": leggin_rrp,
+                "sizes": find_size(leggin_id),
             }
         )
 
@@ -34,13 +35,7 @@ def get_list_of_leggins_from_page(page_number):
 
 
 def get_rrp_from_single_site(identificator):
-    single_leggin_site = "https://www.myprotein.pl/" + str(identificator) + ".html"
-    single_response = requests.get(single_leggin_site)
-
-    single_response_html = single_response.text
-    parsed_single_response_html = BeautifulSoup(
-        single_response_html, features="html.parser"
-    )
+    parsed_single_response_html = get_single_leggin_page(identificator)
 
     if parsed_single_response_html.find("p", class_="productPrice_rrp"):
         leggin_rrp = float(
@@ -54,6 +49,17 @@ def get_rrp_from_single_site(identificator):
     return leggin_rrp
 
 
+def get_single_leggin_page(identificator):
+    single_leggin_site = "https://www.myprotein.pl/" + str(identificator) + ".html"
+    single_response = requests.get(single_leggin_site)
+
+    single_response_html = single_response.text
+    parsed_single_response_html = BeautifulSoup(
+        single_response_html, features="html.parser"
+    )
+    return parsed_single_response_html
+
+
 def get_list_of_leggins():
     page_number = 1
     list_of_leggins = []
@@ -65,3 +71,16 @@ def get_list_of_leggins():
         list_of_leggins_per_page = get_list_of_leggins_from_page(page_number)
 
     return list_of_leggins
+
+
+def find_size(leggin_id):
+    single_leggin_page = get_single_leggin_page(leggin_id)
+    sizes_box = single_leggin_page.find("div", class_="athenaProductVariations_boxes")
+    if sizes_box:
+        sizes_list = list(
+            map(
+                lambda arg: arg.text.strip().replace("\n selected", ""),
+                sizes_box.find_all("button"),
+            )
+        )
+        return sizes_list
