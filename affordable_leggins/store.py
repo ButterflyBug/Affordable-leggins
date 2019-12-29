@@ -21,7 +21,7 @@ def store_data(directory_name):
 
 def read_data(directory_name, day, month, year):
     file_name = (
-        directory_name + "/leggins_lists_" + day + "-" + month + "-" + year + ".json"
+        directory_name + "/leggins_lists_" + str(day).zfill(2) + "-" + str(month).zfill(2) + "-" + str(year) + ".json"
     )
     with open(file_name, "r") as file:
         data_to_read = file.read()

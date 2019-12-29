@@ -93,7 +93,18 @@ def test_read_data():
         "leggin_name": "Legginsy siatkowe Power",
         "leggin_id": "11869780",
         "leggin_price": 179.0,
-        "leggin_rrp": 179.0
+        "leggin_rrp": 179.0,
     }
-    leggins_list = read_data("tests/data/test_leggins_list", "04", "12", "2019")
+    leggins_list = read_data("tests/data/test_leggins_list", "04", "06", "2019")
+    assert leggins_list[1] == leggin
+
+
+def test_read_data_with_integer_values():
+    leggin = {
+        "leggin_name": "Legginsy siatkowe Power",
+        "leggin_id": "11869780",
+        "leggin_price": 179.0,
+        "leggin_rrp": 179.0,
+    }
+    leggins_list = read_data("tests/data/test_leggins_list", 4, 6, 2019)
     assert leggins_list[1] == leggin
