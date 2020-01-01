@@ -33,10 +33,15 @@ def test_get_list_of_leggins_from_existing_page():
         "leggin_name": "Legginsy Curve - Czarne",
         "leggin_price": 159.0,
         "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"]
+        "sizes": ["XS", "S", "M", "L", "XL"],
     }
 
-    matched_leggin = list(filter(lambda leggin: leggin["leggin_id"] == "12068032", get_list_of_leggins_from_page(1)))
+    matched_leggin = list(
+        filter(
+            lambda leggin: leggin["leggin_id"] == "12068032",
+            get_list_of_leggins_from_page(1),
+        )
+    )
     assert matched_leggin[0] == single_leggin
 
 
@@ -59,7 +64,7 @@ def test_get_list_of_leggins():
         "leggin_id": "12068032",
         "leggin_price": 159.0,
         "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"]
+        "sizes": ["XS", "S", "M", "L", "XL"],
     }
 
     leggin_from_second_page = {
@@ -67,7 +72,7 @@ def test_get_list_of_leggins():
         "leggin_id": "12016444",
         "leggin_price": 196.0,
         "leggin_rrp": 199.0,
-        "sizes": ["S", "M", "L", "XL"]
+        "sizes": ["S", "M", "L", "XL"],
     }
 
     assert leggin_from_first_page in list_of_leggins
@@ -83,7 +88,7 @@ def test_store_data():
         "leggin_id": "12068032",
         "leggin_price": 159.0,
         "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"]
+        "sizes": ["XS", "S", "M", "L", "XL"],
     }
 
     file = store_data("tests/data/test_leggins_list")
