@@ -11,3 +11,7 @@ def filter_name(leggins, name, reject=False):
         result = list(filter(lambda leggin: name in leggin["leggin_name"], leggins))
 
     return result
+
+
+def filter_current_price(leggins, price_range):
+    return list(filter(lambda leggin: leggin["leggin_price"] in price_range, leggins))
