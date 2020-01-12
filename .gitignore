@@ -4,3 +4,4 @@ __pycache__
 .pytest_cache
 affordable_leggins.egg-info
 .python-version 
+sendgrid.env
