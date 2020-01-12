@@ -5,6 +5,12 @@ from affordable_leggins.store import store_data
 from affordable_leggins.store import read_data
 from affordable_leggins.min_current_price import find_min_current_price
 from affordable_leggins.filters import filter_size, filter_name, filter_current_price
+from affordable_leggins.send_notification import (
+    send_email,
+    email_address,
+    subject,
+    message,
+)
 
 
 try:
@@ -26,3 +32,5 @@ try:
 except IndexError:
     print("Please enter directory")
     print("Usage: run_store_data.py /path/to/directory")
+
+send_email(email_address(), subject(), message(email_address(), leggins))

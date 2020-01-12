@@ -4,3 +4,4 @@ beautifulsoup4==4.8.1
 vcrpy==2.1.1
 pytest-recording==0.3.4
 flake8==3.7.9
+sendgrid==6.1.0
