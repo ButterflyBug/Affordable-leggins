@@ -1,0 +1,12 @@
+Hello {{ email_address }},
+{% if leggins %}
+We have found products which meet your criteria:
+
+{% spaceless %}
+{% for leggin in leggins %}
+* {{ leggin.leggin_name }} ({{ leggin.leggin_price|stringformat:".2f" }} PLN) - https://www.myprotein.pl/{{ leggin.leggin_id }}.html{% endfor %}
+{% endspaceless %}
+{% else %}
+We have not found products which meet your criteria.
+{% endif %}
+Happy hunting!
