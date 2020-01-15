@@ -31,7 +31,8 @@ def subject():
 
 
 def message(mail_address, products):
-    message = open("affordable_leggins/templates/notification_email.txt", "r").read()
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    message = open(base_dir + "/templates/notification_email.txt", "r").read()
     context = Context({"email_address": mail_address, "leggins": products})
     engine = Engine()
 
