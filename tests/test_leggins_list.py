@@ -72,7 +72,7 @@ def test_get_list_of_leggins():
         "leggin_id": "12016444",
         "leggin_price": 196.0,
         "leggin_rrp": 199.0,
-        "sizes": ["S", "M", "L", "XL"],
+        "sizes": ["S", "L", "XL"],
     }
 
     assert leggin_from_first_page in list_of_leggins

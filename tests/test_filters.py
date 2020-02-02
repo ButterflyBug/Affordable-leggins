@@ -16,11 +16,11 @@ def test_filter_other_size(leggins, leggin_with_size_m):
 
 
 def test_filter_non_existing_size(leggins):
-    assert filter_size(leggins, "XL") is None
+    assert filter_size(leggins, "XL") == []
 
 
 def test_filter_other_non_existing_size(leggins):
-    assert filter_size(leggins, "L") is None
+    assert filter_size(leggins, "L") == []
 
 
 def test_filter_leggins_with_multiple_sizes(leggins, leggin_with_size_s):
