@@ -79,8 +79,8 @@ def find_size(leggin_id):
     if sizes_box:
         sizes_list = list(
             map(
-                lambda arg: arg.text.strip().replace("\n selected", ""),
-                sizes_box.find_all("button"),
+                lambda arg: arg.text.strip().replace("\n wybrany", ""),
+                sizes_box.find_all("button", class_="inStock"),
             )
         )
         return sizes_list
