@@ -6,3 +6,4 @@ pytest-recording==0.3.4
 flake8==3.7.9
 sendgrid==6.1.0
 django==3.0.2
+pytest-django
