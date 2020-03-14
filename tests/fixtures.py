@@ -1,7 +1,7 @@
 import pytest
 
 
-@pytest.fixture()
+@pytest.fixture()  # (leggins)
 def leggins(leggin_with_size_xs, leggin_with_size_s, leggin_with_size_m):
     leggins = [leggin_with_size_xs, leggin_with_size_s, leggin_with_size_m]
 
