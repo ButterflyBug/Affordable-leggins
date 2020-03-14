@@ -5,3 +5,6 @@ __pycache__
 affordable_leggins.egg-info
 .python-version 
 sendgrid.env
+leggins_list_files
+tests/data/test_leggins_list/leggins_lists_*.json
+db.sqlite3
