@@ -1,8 +1,9 @@
 import json
 import os
 import datetime
+import affordable_leggins.setup_django
 from affordable_leggins.leggins_list import get_list_of_leggins
-from affordable_leggins.storage.models import Leggin
+from affordable_leggins.storage.models import Leggin, Size
 
 
 def make_directory(directory_name):
@@ -30,10 +31,24 @@ def store_data_in_database():
         leggin.date = datetime.datetime.now()
         leggin.save()
 
+        for single_size in single_leggin["sizes"]:
+            size = Size.objects.filter(name=single_size).first() or Size()
+            size.name = single_size
+            size.save()
+            leggin.sizes.add(size)
+
 
 def read_data(directory_name, day, month, year):
     file_name = (
-        directory_name + "/leggins_lists_" + str(day).zfill(2) + "-" + str(month).zfill(2) + "-" + str(year) + ".json")
+        directory_name
+        + "/leggins_lists_"
+        + str(day).zfill(2)
+        + "-"
+        + str(month).zfill(2)
+        + "-"
+        + str(year)
+        + ".json"
+    )
     with open(file_name, "r") as file:
         data_to_read = file.read()
         return json.loads(data_to_read)
