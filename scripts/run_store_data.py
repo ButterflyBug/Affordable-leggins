@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import sys
+import os
 from datetime import date
-from affordable_leggins.store import store_data
+from affordable_leggins.store import store_data, store_data_in_database
 from affordable_leggins.store import read_data
 from affordable_leggins.min_current_price import find_min_current_price
 from affordable_leggins.filters import filter_size, filter_name, filter_current_price
@@ -15,6 +16,7 @@ from affordable_leggins.send_notification import (
 
 try:
     store_data(sys.argv[1])
+    store_data_in_database()
     current_date = date.today()
     leggins = read_data(
         sys.argv[1], current_date.day, current_date.month, current_date.year
