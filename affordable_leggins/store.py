@@ -52,3 +52,19 @@ def read_data(directory_name, day, month, year):
     with open(file_name, "r") as file:
         data_to_read = file.read()
         return json.loads(data_to_read)
+
+
+def convert_leggin_to_dict(leggin):
+    return {
+        "leggin_name": leggin.name,
+        "leggin_id": leggin.external_id,
+        "leggin_price": leggin.price,
+        "leggin_rrp": leggin.rrp,
+        "sizes": list(map(lambda size: size.name, leggin.sizes.all()))
+    }
+
+
+def read_data_from_database(day, month, year):
+    leggins = Leggin.objects.filter(date=datetime.date(year, month, day))
+    result = list(map(convert_leggin_to_dict, leggins))
+    return result
