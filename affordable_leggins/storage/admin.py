@@ -4,7 +4,7 @@ from affordable_leggins.storage.models import Leggin, Size
 
 class LegginAdmin(admin.ModelAdmin):
     list_filter = ("sizes", "price", "date")
-    list_display = ("name", "price", "date", "url")
+    list_display = ("name", "price", "date", "url", "created_at")
     search_fields = ("name",)
 
 

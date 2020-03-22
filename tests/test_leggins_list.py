@@ -2,9 +2,11 @@ import pytest
 from affordable_leggins.leggins_list import get_rrp_from_single_site
 from affordable_leggins.leggins_list import get_list_of_leggins_from_page
 from affordable_leggins.leggins_list import get_list_of_leggins
-from affordable_leggins.store import store_data, read_data
+from affordable_leggins.store import store_data, read_data, read_data_from_database
+from affordable_leggins.storage.models import Leggin, Size
 import json
 import os
+import datetime
 
 
 @pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
@@ -119,3 +121,32 @@ def test_read_data_with_integer_values():
     }
     leggins_list = read_data("tests/data/test_leggins_list", 4, 6, 2019)
     assert leggins_list[1] == leggin
+
+
+@pytest.mark.django_db
+def test_read_data_from_database():
+    leggin = Leggin()
+    leggin.name = "Legginsy siatkowe Power"
+    leggin.external_id = "11869780"
+    leggin.price = 179.0
+    leggin.rrp = 179.0
+    leggin.date = datetime.date(2020, 3, 22)
+    leggin.save()
+    size = Size()
+    size.name = "S"
+    size.save()
+    leggin.sizes.add(size)
+
+    converted_leggin = {
+        "leggin_name": "Legginsy siatkowe Power",
+        "leggin_id": 11869780,
+        "leggin_price": 179.0,
+        "leggin_rrp": 179.0,
+        "sizes": ["S"],
+    }
+    assert read_data_from_database(22, 3, 2020) == [converted_leggin]
+
+
+@pytest.mark.django_db
+def test_read_data_from_database_non_existing_data():
+    assert read_data_from_database(22, 3, 2050) == []
