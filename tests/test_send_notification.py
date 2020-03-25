@@ -2,6 +2,7 @@ import os
 import inspect
 import textwrap
 import pytest
+import mock
 from affordable_leggins.send_notification import (
     send_email,
     email_address,
@@ -11,8 +12,8 @@ from affordable_leggins.send_notification import (
 from fixtures import leggin_with_size_s, leggin_with_size_m
 
 
-@pytest.mark.skip()
-def test_send_email():
+@mock.patch("affordable_leggins.send_notification.SendGridAPIClient")
+def test_send_email(mocked_sendgrid_client):
     email = "kasia@gmail.com"
     subject = "We have found a promotion for you."
     message = "message"
