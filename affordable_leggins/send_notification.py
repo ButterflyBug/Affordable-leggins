@@ -18,8 +18,10 @@ def send_email(email, subject, message_body):
         print(response.status_code)
         print(response.body)
         print(response.headers)
+        return True
     except Exception as e:
         print(e.message)
+        return False
 
 
 def email_address():
