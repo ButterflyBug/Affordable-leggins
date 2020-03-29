@@ -35,7 +35,7 @@ def test_get_list_of_leggins_from_existing_page():
         "leggin_name": "Legginsy Curve - Czarne",
         "leggin_price": 159.0,
         "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"],
+        "sizes": ["XS", "XL"],
     }
 
     matched_leggin = list(
@@ -66,15 +66,15 @@ def test_get_list_of_leggins():
         "leggin_id": "12068032",
         "leggin_price": 159.0,
         "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"],
+        "sizes": ["XS", "XL"],
     }
 
     leggin_from_second_page = {
         "leggin_name": "Bezszwowe legginsy Contrast - Białe",
         "leggin_id": "12016444",
-        "leggin_price": 196.0,
+        "leggin_price": 78.0,
         "leggin_rrp": 199.0,
-        "sizes": ["S", "L", "XL"],
+        "sizes": ["L"],
     }
 
     assert leggin_from_first_page in list_of_leggins
