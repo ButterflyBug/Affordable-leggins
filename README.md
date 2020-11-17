@@ -8,8 +8,19 @@
 ## Development
 Recommended Python version `3.8.0`
 
+`$ pyenv install 3.8.0`
+
+### Virtual environment
+`$ pyenv virtualenv venv_name`
+
+Set your virtual environment for the project:
+
+`$ pyenv local venv_name`
+
 ### Dependencies
 `$ pip install -r requirements.txt`
+
+`$ pip install -e .`
 
 ### Tests
 `$ pytest`
