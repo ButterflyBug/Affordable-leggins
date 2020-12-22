@@ -9,7 +9,7 @@ def get_list_of_leggins_from_page(page_number):
     response_html = response.text
     parsed_response_html = BeautifulSoup(response_html, features="html.parser")
 
-    leggins = parsed_response_html.find_all("div", class_="productListProducts_product")
+    leggins = parsed_response_html.find_all("li", class_="productListProducts_product")
 
     leggin_name_list = []
 
