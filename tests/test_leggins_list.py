@@ -12,7 +12,7 @@ import datetime
 @pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
 def test_get_rrp_from_single_site_when_rrp_available():
     """ Test function when rrp found on the website """
-    assert get_rrp_from_single_site(11869784) == 159.0
+    assert get_rrp_from_single_site(12068050) == 179.0
 
 
 @pytest.mark.vcr("tests/cassettes/test_leggins_list/test_get_list_of_leggins.yaml")
@@ -31,16 +31,16 @@ def test_get_rrp_from_single_site_when_leggin_not_available():
 def test_get_list_of_leggins_from_existing_page():
     """ Test function when page exists """
     single_leggin = {
-        "leggin_id": "12068032",
-        "leggin_name": "Legginsy Curve - Czarne",
-        "leggin_price": 159.0,
-        "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"],
+        "leggin_id": "12068050",
+        "leggin_name": "Legginsy Curve - Szare",
+        "leggin_price": 162.0,
+        "leggin_rrp": 179.0,
+        "sizes": ["XXS", "XS", "S", "M", "L", "XL", "XXL"],
     }
 
     matched_leggin = list(
         filter(
-            lambda leggin: leggin["leggin_id"] == "12068032",
+            lambda leggin: leggin["leggin_id"] == "12068050",
             get_list_of_leggins_from_page(1),
         )
     )
@@ -62,19 +62,19 @@ def test_get_list_of_leggins():
     list_of_leggins = get_list_of_leggins()
 
     leggin_from_first_page = {
-        "leggin_name": "Legginsy Curve - Czarne",
-        "leggin_id": "12068032",
-        "leggin_price": 159.0,
-        "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"],
+        "leggin_id": "12068050",
+        "leggin_name": "Legginsy Curve - Szare",
+        "leggin_price": 162.0,
+        "leggin_rrp": 179.0,
+        "sizes": ["XXS", "XS", "S", "M", "L", "XL", "XXL"],
     }
 
     leggin_from_second_page = {
-        "leggin_name": "Bezszwowe legginsy Contrast - Białe",
-        "leggin_id": "12016444",
-        "leggin_price": 196.0,
-        "leggin_rrp": 199.0,
-        "sizes": ["S", "L", "XL"],
+        "leggin_name": "Dżersejowe Legginsy MP - Danger",
+        "leggin_id": "12459914",
+        "leggin_price": 119.0,
+        "leggin_rrp": 119.0,
+        "sizes": ["L", "XL", "XXL"],
     }
 
     assert leggin_from_first_page in list_of_leggins
@@ -86,11 +86,11 @@ def test_store_data():
     """Tests if file with data is created and checks existing of a product"""
 
     leggin_in_file = {
-        "leggin_name": "Legginsy Curve - Czarne",
-        "leggin_id": "12068032",
-        "leggin_price": 159.0,
-        "leggin_rrp": 159.0,
-        "sizes": ["XS", "S", "M", "L", "XL"],
+        "leggin_id": "12068050",
+        "leggin_name": "Legginsy Curve - Szare",
+        "leggin_price": 162.0,
+        "leggin_rrp": 179.0,
+        "sizes": ["XXS", "XS", "S", "M", "L", "XL", "XXL"],
     }
 
     file = store_data("tests/data/test_leggins_list")
