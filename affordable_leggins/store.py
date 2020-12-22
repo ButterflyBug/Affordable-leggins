@@ -4,6 +4,9 @@ import datetime
 import affordable_leggins.setup_django
 from affordable_leggins.leggins_list import get_list_of_leggins
 from affordable_leggins.storage.models import Leggin, Size
+from typing import Any
+from typing import Dict
+from typing import List
 
 
 def make_directory(directory_name):
@@ -21,7 +24,7 @@ def store_data(directory_name):
         return file
 
 
-def store_data_in_database():
+def store_data_in_database() -> None:
     for single_leggin in get_list_of_leggins():
         leggin = Leggin()
         leggin.name = single_leggin["leggin_name"]
@@ -54,7 +57,7 @@ def read_data(directory_name, day, month, year):
         return json.loads(data_to_read)
 
 
-def convert_leggin_to_dict(leggin):
+def convert_leggin_to_dict(leggin: Leggin) -> Dict[str, Any]:
     return {
         "leggin_name": leggin.name,
         "leggin_id": leggin.external_id,
@@ -64,7 +67,7 @@ def convert_leggin_to_dict(leggin):
     }
 
 
-def read_data_from_database(day, month, year):
+def read_data_from_database(day: int, month: int, year: int) -> List[Dict[str, Any]]:
     leggins = Leggin.objects.filter(date=datetime.date(year, month, day))
     result = list(map(convert_leggin_to_dict, leggins))
     return result

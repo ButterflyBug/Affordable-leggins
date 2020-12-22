@@ -1,8 +1,11 @@
 import requests
-from bs4 import BeautifulSoup
+from typing import List, Set, Dict, Tuple, Optional
+from bs4 import BeautifulSoup  # type: ignore
+from typing import List
+from typing import Optional
 
 
-def get_list_of_leggins_from_page(page_number):
+def get_list_of_leggins_from_page(page_number: int):
     my_protein_site = "https://www.myprotein.pl/clothing/womens/gym-leggings.list"
     response = requests.get(my_protein_site, {"pageNumber": page_number})
 
@@ -16,7 +19,7 @@ def get_list_of_leggins_from_page(page_number):
     for leggin in leggins:
         leggin_data = leggin.find("span")
         leggin_name = leggin_data["data-product-title"]
-        leggin_id = leggin_data["data-product-id"]
+        leggin_id = int(leggin_data["data-product-id"])
         leggin_price = float(leggin_data["data-product-price"].replace(" zł", ""))
 
         leggin_rrp = get_rrp_from_single_site(leggin_id) or leggin_price
@@ -34,11 +37,11 @@ def get_list_of_leggins_from_page(page_number):
     return leggin_name_list
 
 
-def get_rrp_from_single_site(identificator):
+def get_rrp_from_single_site(identificator: int) -> Optional[float]:
     parsed_single_response_html = get_single_leggin_page(identificator)
 
     if parsed_single_response_html.find("p", class_="productPrice_rrp"):
-        leggin_rrp = float(
+        leggin_rrp: Optional[float] = float(
             parsed_single_response_html.find("p", class_="productPrice_rrp")
             .text.replace(" zł", "")
             .replace("RRP: ", "")
@@ -49,7 +52,7 @@ def get_rrp_from_single_site(identificator):
     return leggin_rrp
 
 
-def get_single_leggin_page(identificator):
+def get_single_leggin_page(identificator: int) -> BeautifulSoup:
     single_leggin_site = "https://www.myprotein.pl/" + str(identificator) + ".html"
     single_response = requests.get(single_leggin_site)
 
@@ -73,7 +76,7 @@ def get_list_of_leggins():
     return list_of_leggins
 
 
-def find_size(leggin_id):
+def find_size(leggin_id: int) -> List[str]:
     single_leggin_page = get_single_leggin_page(leggin_id)
     sizes_box = single_leggin_page.find("div", class_="athenaProductVariations_boxes")
     if sizes_box:
@@ -84,3 +87,5 @@ def find_size(leggin_id):
             )
         )
         return sizes_list
+    else:
+        return []

@@ -1,4 +1,10 @@
+from typing import Any
+from typing import Dict
+from typing import List
+
+
 def filter_size(leggins, size):
+    # type: (List[Dict[str, Any]], str) -> List[Dict[str, Any]]
     return list(filter(lambda leggin: size in leggin["sizes"], leggins))
 
 

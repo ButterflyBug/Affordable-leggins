@@ -9,3 +9,4 @@ django==3.0.7
 pytest-django==3.8.0
 pytest-mock==2.0.0
 mock==4.0.1
+pyannotate==1.2.0
