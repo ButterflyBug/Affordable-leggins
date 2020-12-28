@@ -13,6 +13,9 @@ Recommended Python version `3.8.0`
 ### Virtual environment
 `$ pyenv virtualenv venv_name`
 
+Note: install pyenv-virtualenv plugin
+https://github.com/pyenv/pyenv-virtualenv
+
 Set your virtual environment for the project:
 
 `$ pyenv local venv_name`
